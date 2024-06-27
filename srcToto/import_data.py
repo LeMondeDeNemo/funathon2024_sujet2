@@ -1,5 +1,6 @@
 import pandas as pd
-from ./srcToto/clean_data_frame import clean_dataframe
+import geopandas as gpd
+from clean_data_frame import clean_dataframe
 
 def import_airport_data(list_files):
     col_type = {
@@ -49,3 +50,8 @@ def import_liaisons_data(list_files):
 
     return pax_lsn_file
 
+from create_data_list import create_data_list
+
+urls = create_data_list("sources.yml")
+
+airports_location = gpd.read_file(urls['geojson']['airport'])
