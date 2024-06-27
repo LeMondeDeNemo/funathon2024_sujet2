@@ -7,3 +7,4 @@ def create_data_list(source_file):
     return catalogue
 
 urls = create_data_list("sources.yml")
+
