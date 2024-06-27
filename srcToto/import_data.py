@@ -55,3 +55,4 @@ from create_data_list import create_data_list
 urls = create_data_list("sources.yml")
 
 airports_location = gpd.read_file(urls['geojson']['airport'])
+print(airports_location)
