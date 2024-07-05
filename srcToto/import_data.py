@@ -1,23 +1,27 @@
 import pandas as pd
 import geopandas as gpd
-from clean_data_frame import clean_dataframe
-import folium
-
+from .clean_data_frame import clean_dataframe
+from .create_data_list import create_data_list
 
 def import_airport_data(list_files):
-    col_type = {
-    "ANMOIS": "str",  
-    "APT": "str",
-    "APT_NOM": "str", 
-    "APT_ZON": "str",
+    # Define the data types for each column
+    col_types = {
+        "ANMOIS": "str",
+        "APT": "str",     # equivalent to col_character()
+        "APT_NOM": "str", # equivalent to col_character()
+        "APT_ZON": "str", # equivalent to col_character()
     }
 
-    for file in list_files:
-        pax_apt_file = pd.concat([pd.read_csv(file, delimiter = ";", dtype = col_type)])
-    
-    pax_apt_file = clean_dataframe(pax_apt_file)
+    # Read the CSV file(s) with the specified column types
+    pax_apt_all = pd.concat([
+        pd.read_csv(file, delimiter = ';', dtype = col_types)
+        for file in list_files
+        ])
 
-    return pax_apt_file
+    # Clean the DataFrame (assuming clean_dataframe is a predefined function)
+    pax_apt_all = clean_dataframe(pax_apt_all)
+
+    return pax_apt_all
 
 def import_compagnies_data(list_files):
     col_type = {
@@ -52,16 +56,13 @@ def import_liaisons_data(list_files):
 
     return pax_lsn_file
 
-from create_data_list import create_data_list
 
 urls = create_data_list("sources.yml")
 
 airports_location = gpd.read_file(urls['geojson']['airport'])
-#print(airports_location)
+print(airports_location)
 
-m = folium.Map()
-folium.GeoJson(airports_location).add_to(m)
-m
+
 
 
 

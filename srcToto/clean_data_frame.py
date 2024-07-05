@@ -1,4 +1,4 @@
-from create_data_list import create_data_list
+from .create_data_list import create_data_list
 import pandas as pd
 
 def clean_dataframe(df):

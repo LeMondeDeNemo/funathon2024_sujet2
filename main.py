@@ -3,8 +3,10 @@ import geopandas as gpd
 import plotly.express as px
 from plotnine import ggplot, geom_line, aes
 
+
 import srcToto.import_data as sid
 from srcToto.create_data_list import create_data_list
+
 
 # Load data ----------------------------------
 urls = create_data_list("./sources.yml")
