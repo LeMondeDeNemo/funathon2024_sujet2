@@ -1,6 +1,8 @@
 import pandas as pd
 import geopandas as gpd
 from clean_data_frame import clean_dataframe
+import folium
+
 
 def import_airport_data(list_files):
     col_type = {
@@ -55,4 +57,11 @@ from create_data_list import create_data_list
 urls = create_data_list("sources.yml")
 
 airports_location = gpd.read_file(urls['geojson']['airport'])
-print(airports_location)
+#print(airports_location)
+
+m = folium.Map()
+folium.GeoJson(airports_location).add_to(m)
+m
+
+
+
